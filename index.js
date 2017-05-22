@@ -1,3 +1,5 @@
+const Alexa = require('alexa-sdk');
+
 const request = require('superagent');
 const cheerio = require('cheerio');
 
@@ -37,3 +39,17 @@ function getTextExplanation(comicNumber) {
     return paragraphs.text();
   });
 }
+
+exports.handler = (event, context, callback) => {
+  const alexa = Alexa.handler(event, context);
+  // Register request handlers
+  alexa.registerHandlers({
+    ExplainIntent() {
+      // Get value of number slot
+      const num = this.event.request.intent.slots.comicNumber.value;
+      // Speak the explanation
+      getTextExplanation(num).then((explanation) => this.emit(':tell', explanation));
+    },
+  });
+  alexa.execute();
+};
