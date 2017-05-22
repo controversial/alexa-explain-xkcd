@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "alexa-sdk": "^1.0.9",
     "cheerio": "^0.22.0",
     "superagent": "^3.5.2"
   }
