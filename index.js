@@ -58,15 +58,23 @@ exports.handler = (event, context, callback) => {
   alexa.registerHandlers({
     ExplainIntent() {
       // Get value of number slot
-      const num = this.event.request.intent.slots.number.value;
+      const number = this.event.request.intent.slots.number.value;
       // Speak the explanation
-      getTextExplanation(num)
-        .then((explanation) => this.emit(':tell', explanation));
+      getTextExplanation(number)
+        .then((explanation) => this.emit(
+          ':tell',
+          `Comic ${number}: ${explanation}`
+        ));
     },
     Unhandled() {
       getCurrentNumber()
-        .then(number => getTextExplanation(number))
-        .then((explanation) => this.emit(':tell', explanation))
+        .then((number) => {
+          getTextExplanation(number)
+            .then(explanation => this.emit(
+              ':tell',
+              `Comic ${number}: ${explanation}`
+            ))
+        })
     }
   });
   alexa.execute();
