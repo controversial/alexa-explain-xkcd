@@ -46,7 +46,7 @@ exports.handler = (event, context, callback) => {
   alexa.registerHandlers({
     ExplainIntent() {
       // Get value of number slot
-      const num = this.event.request.intent.slots.comicNumber.value;
+      const num = this.event.request.intent.slots.number.value;
       // Speak the explanation
       getTextExplanation(num).then((explanation) => this.emit(':tell', explanation));
     },
