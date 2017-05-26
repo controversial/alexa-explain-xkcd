@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "zip": "zip -r ../alexa-explain-xkcd.zip ./*"
+    "zip": "zip -rq ../alexa-explain-xkcd.zip ./*"
   },
   "dependencies": {
     "alexa-sdk": "^1.0.9",
