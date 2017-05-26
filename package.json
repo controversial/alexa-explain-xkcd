@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "zip": "zip -r ../alexa-explain-xkcd.zip ./*"
+  },
   "dependencies": {
     "alexa-sdk": "^1.0.9",
     "cheerio": "^0.22.0",
