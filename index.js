@@ -3,6 +3,17 @@ const Alexa = require('alexa-sdk');
 const request = require('superagent');
 const cheerio = require('cheerio');
 
+function getCurrentNumber() {
+  return new Promise((resolve, reject) => {
+    request
+      .get('https://xkcd.com/info.0.json')
+      .end((err, res) => {
+        if (err) reject(err);
+        else resolve(res.body.num);
+      });
+  });
+}
+
 function getHtml(comicNumber) {
   return new Promise((resolve, reject) => {
     request
@@ -49,8 +60,14 @@ exports.handler = (event, context, callback) => {
       // Get value of number slot
       const num = this.event.request.intent.slots.number.value;
       // Speak the explanation
-      getTextExplanation(num).then((explanation) => this.emit(':tell', explanation));
+      getTextExplanation(num)
+        .then((explanation) => this.emit(':tell', explanation));
     },
+    Unhandled() {
+      getCurrentNumber()
+        .then(number => getTextExplanation(number))
+        .then((explanation) => this.emit(':tell', explanation))
+    }
   });
   alexa.execute();
 };
