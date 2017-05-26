@@ -42,6 +42,7 @@ function getTextExplanation(comicNumber) {
 
 exports.handler = (event, context, callback) => {
   const alexa = Alexa.handler(event, context);
+  alexa.appId = 'amzn1.ask.skill.3ff3c7ac-0c42-4957-bb3b-6bcf44ddff3e';
   // Register request handlers
   alexa.registerHandlers({
     ExplainIntent() {
